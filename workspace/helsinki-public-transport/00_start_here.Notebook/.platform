@@ -3,7 +3,7 @@
   "metadata": {
     "type": "Notebook",
     "displayName": "00_start_here",
-    "description": "Binds the semantic model to the Eventhouse created in this workspace."
+    "description": "Binds the semantic model and its Kusto credentials to this workspace."
   },
   "config": {
     "version": "2.0",
