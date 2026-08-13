@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "00_start_here",
+    "description": "Binds the semantic model to the Eventhouse created in this workspace."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c4a1d0f4-3a1a-5b3e-9c8b-1f2f3a4b5c6d"
+  }
+}
