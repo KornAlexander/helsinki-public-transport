@@ -112,9 +112,9 @@ HSL_TRIP_UPDATES_URL = "https://realtime.hsl.fi/realtime/trip-updates/v2/hsl"
 # Optional Digitransit subscription key (https://portal-api.digitransit.fi/). Empty = public access.
 DIGITRANSIT_SUBSCRIPTION_KEY = ""
 
-# Eventstream custom endpoint - resolved at run time, never hard-coded
-EVENTSTREAM_ITEM_ID = "c16a0a22-e2e6-410f-ab49-0f77c6521a5c"
-EVENTSTREAM_SOURCE_ID = "8c08432c-ecae-4866-9bd6-3edbadd746ce"
+# Eventstream custom endpoint - both the item and its source node are looked up by name below,
+# so this notebook works in whatever workspace it was deployed into.
+EVENTSTREAM_NAME_IN_WORKSPACE = "ES_Helsinki_Transport_Events"
 
 # Fetch intervals (seconds)
 VEHICLE_POSITIONS_INTERVAL = 1.2   # HSL refreshes every 1-2 s
@@ -144,6 +144,32 @@ from datetime import datetime, timezone
 from google.transit import gtfs_realtime_pb2
 from google.protobuf.json_format import MessageToDict
 from azure.eventhub import EventHubProducerClient, EventData
+
+# Resolve the Eventstream and its custom-endpoint source in this workspace. Ids differ in every
+# deployment, so anything hard-coded here would only ever work in the workspace it was exported
+# from - and the failure mode is a cancelled Spark session with no usable message.
+_eventstreams = requests.get(
+    f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}/eventstreams",
+    headers=HEADERS, timeout=60,
+).json()["value"]
+_match = [e for e in _eventstreams if e["displayName"] == EVENTSTREAM_NAME_IN_WORKSPACE]
+if not _match:
+    raise LookupError(
+        f"no Eventstream named {EVENTSTREAM_NAME_IN_WORKSPACE!r} in this workspace - "
+        f"found {[e['displayName'] for e in _eventstreams]}"
+    )
+EVENTSTREAM_ITEM_ID = _match[0]["id"]
+
+_topology = requests.get(
+    f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}"
+    f"/eventstreams/{EVENTSTREAM_ITEM_ID}/topology",
+    headers=HEADERS, timeout=60,
+).json()
+_sources = [s for s in _topology.get("sources", []) if s.get("type") == "CustomEndpoint"]
+if not _sources:
+    raise LookupError("the Eventstream has no CustomEndpoint source to publish into")
+EVENTSTREAM_SOURCE_ID = _sources[0]["id"]
+print(f"Eventstream {EVENTSTREAM_ITEM_ID} source {EVENTSTREAM_SOURCE_ID}")
 
 conn_url = (
     f"https://api.fabric.microsoft.com/v1/workspaces/{workspace_id}"
