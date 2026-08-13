@@ -25,7 +25,7 @@ table Number_Positions
 		mode: directQuery
 		source =
 				let
-				Source = AzureDataExplorer.Contents("https://trd-2jyvwr79q6tkyebzkx.z2.kusto.fabric.microsoft.com", "f1a31656-f44a-47af-bf6a-7aa1de168b86", "vehicle_positions#(lf)| summarize  total_number_positions = count() , number_positions_last_hour = countif(timestamp > now()-1h)", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null])
+				Source = AzureDataExplorer.Contents("https://trd-2jyvwr79q6tkyebzkx.z2.kusto.fabric.microsoft.com", "3402a710-0b44-558d-a9da-0858b403bef6", "vehicle_positions#(lf)| summarize  total_number_positions = count() , number_positions_last_hour = countif(timestamp > now()-1h)", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null])
 				in
 				Source
 

@@ -21,7 +21,7 @@ table Vehicles
 		mode: directQuery
 		source =
 				let
-				Source = AzureDataExplorer.Contents("https://trd-2jyvwr79q6tkyebzkx.z2.kusto.fabric.microsoft.com", "f1a31656-f44a-47af-bf6a-7aa1de168b86", "last_vehicle_position
+				Source = AzureDataExplorer.Contents("https://trd-2jyvwr79q6tkyebzkx.z2.kusto.fabric.microsoft.com", "3402a710-0b44-558d-a9da-0858b403bef6", "last_vehicle_position
 				| where timestamp > now() - 2h", []),
 				    #"Removed Other Columns" = Table.SelectColumns(Source,{"vehicle_id"})
 				in

@@ -186,7 +186,7 @@ table Selected_Vehicle_Path
 		mode: directQuery
 		source =
 				let
-				Source = AzureDataExplorer.Contents("https://trd-2jyvwr79q6tkyebzkx.z2.kusto.fabric.microsoft.com", "f1a31656-f44a-47af-bf6a-7aa1de168b86", "vehicle_positions#(lf)| where vehicle_id  == """& Selected_Vehicle &""" and  timestamp > now() - 2h#(lf)| top 1000 by timestamp", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null])
+				Source = AzureDataExplorer.Contents("https://trd-2jyvwr79q6tkyebzkx.z2.kusto.fabric.microsoft.com", "3402a710-0b44-558d-a9da-0858b403bef6", "vehicle_positions#(lf)| where vehicle_id  == """& Selected_Vehicle &""" and  timestamp > now() - 2h#(lf)| top 1000 by timestamp", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null])
 				in
 				Source
 

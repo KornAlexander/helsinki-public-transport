@@ -15,7 +15,7 @@
       "properties": {
         "dataIngestionMode": "ProcessedIngestion",
         "workspaceId": "5249380b-543f-4e2b-ab7a-39d5ae7633e8",
-        "itemId": "f1a31656-f44a-47af-bf6a-7aa1de168b86",
+        "itemId": "3402a710-0b44-558d-a9da-0858b403bef6",
         "databaseName": "HSL_EH",
         "tableName": "raw_events",
         "inputSerialization": {
