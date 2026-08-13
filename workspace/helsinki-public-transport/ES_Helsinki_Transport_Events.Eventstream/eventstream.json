@@ -1,0 +1,50 @@
+{
+  "sources": [
+    {
+      "id": "8c08432c-ecae-4866-9bd6-3edbadd746ce",
+      "name": "HSL_Events_Source",
+      "type": "CustomEndpoint",
+      "properties": {}
+    }
+  ],
+  "destinations": [
+    {
+      "id": "ff2b4886-04f2-4677-9272-5fee86134d34",
+      "name": "Eventhouse",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "ProcessedIngestion",
+        "workspaceId": "5249380b-543f-4e2b-ab7a-39d5ae7633e8",
+        "itemId": "f1a31656-f44a-47af-bf6a-7aa1de168b86",
+        "databaseName": "HSL_EH",
+        "tableName": "raw_events",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "ES_HSL_Events-stream"
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "e3bddcb9-1df3-45c0-b76b-611c80b03d60",
+      "name": "ES_HSL_Events-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "HSL_Events_Source"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.1"
+}

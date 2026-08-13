@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "NB_Helsinki_Realtime_Tracker",
+    "description": "Polls the public HSL GTFS-RT feeds and pushes events to Eventstream ES_HSL_Events."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "00000000-0000-0000-0000-000000000000"
+  }
+}
